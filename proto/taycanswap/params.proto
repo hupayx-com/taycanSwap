@@ -1,0 +1,12 @@
+syntax = "proto3";
+package hupayxcom.taycanswap.taycanswap;
+
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/hupayx-com/taycanSwap/x/taycanswap/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (gogoproto.goproto_stringer) = false;
+  
+}
