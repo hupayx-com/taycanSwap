@@ -8,5 +8,16 @@ option go_package = "github.com/hupayx-com/taycanSwap/x/taycanswap/types";
 // Params defines the parameters for the module.
 message Params {
   option (gogoproto.goproto_stringer) = false;
-  
+
+  string swap_commition                = 1 [
+    (gogoproto.moretags)   = "yaml:\"swap_commition\"",
+    (gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec",
+    (gogoproto.nullable)   = false
+  ];
+
+  string swap_rest_endpoint = 2 [(gogoproto.moretags) = "yaml:\"swap_rest_endpoint\""];
+
+  string swap_base_denom = 3 [(gogoproto.moretags) = "yaml:\"swap_base_denom\""];
+
+  bool swap_enabled = 4 [(gogoproto.moretags) = "yaml:\"swap_enabled\""];
 }
