@@ -1,11 +1,13 @@
 syntax = "proto3";
 package hupayxcom.taycanswap.taycanswap;
 
-import "gogoproto/gogo.proto";
+
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "taycanswap/params.proto";
 // this line is used by starport scaffolding # 1
+import "cosmos/base/v1beta1/coin.proto";
+import "gogoproto/gogo.proto";
 
 option go_package = "github.com/hupayx-com/taycanSwap/x/taycanswap/types";
 
@@ -15,7 +17,12 @@ service Query {
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/hupayxcom/taycanswap/taycanswap/params";
   }
-  // this line is used by starport scaffolding # 2
+  // Queries a list of estimateSwap items.
+	rpc EstimateSwap(QueryEstimateSwapRequest) returns (QueryEstimateSwapResponse) {
+		option (google.api.http).get = "/hupayx-com/taycanswap/taycanswap/estimateSwap";
+	}
+
+// this line is used by starport scaffolding # 2
 }
 
 // QueryParamsRequest is request type for the Query/Params RPC method.
@@ -25,6 +32,14 @@ message QueryParamsRequest {}
 message QueryParamsResponse {
   // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryEstimateSwapRequest {
+  cosmos.base.v1beta1.Coin coin = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryEstimateSwapResponse {
+  cosmos.base.v1beta1.DecCoin coin = 1 [(gogoproto.nullable) = false];
 }
 
 // this line is used by starport scaffolding # 3

@@ -6,6 +6,7 @@ package types
 import (
 	context "context"
 	fmt "fmt"
+	types "github.com/cosmos/cosmos-sdk/types"
 	_ "github.com/cosmos/cosmos-sdk/types/query"
 	_ "github.com/gogo/protobuf/gogoproto"
 	grpc1 "github.com/gogo/protobuf/grpc"
@@ -113,35 +114,132 @@ func (m *QueryParamsResponse) GetParams() Params {
 	return Params{}
 }
 
+type QueryEstimateSwapRequest struct {
+	Coin types.Coin `protobuf:"bytes,1,opt,name=coin,proto3" json:"coin"`
+}
+
+func (m *QueryEstimateSwapRequest) Reset()         { *m = QueryEstimateSwapRequest{} }
+func (m *QueryEstimateSwapRequest) String() string { return proto.CompactTextString(m) }
+func (*QueryEstimateSwapRequest) ProtoMessage()    {}
+func (*QueryEstimateSwapRequest) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dca2c4272acc6bc0, []int{2}
+}
+func (m *QueryEstimateSwapRequest) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryEstimateSwapRequest) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryEstimateSwapRequest.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryEstimateSwapRequest) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryEstimateSwapRequest.Merge(m, src)
+}
+func (m *QueryEstimateSwapRequest) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryEstimateSwapRequest) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryEstimateSwapRequest.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryEstimateSwapRequest proto.InternalMessageInfo
+
+func (m *QueryEstimateSwapRequest) GetCoin() types.Coin {
+	if m != nil {
+		return m.Coin
+	}
+	return types.Coin{}
+}
+
+type QueryEstimateSwapResponse struct {
+	Coin types.DecCoin `protobuf:"bytes,1,opt,name=coin,proto3" json:"coin"`
+}
+
+func (m *QueryEstimateSwapResponse) Reset()         { *m = QueryEstimateSwapResponse{} }
+func (m *QueryEstimateSwapResponse) String() string { return proto.CompactTextString(m) }
+func (*QueryEstimateSwapResponse) ProtoMessage()    {}
+func (*QueryEstimateSwapResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dca2c4272acc6bc0, []int{3}
+}
+func (m *QueryEstimateSwapResponse) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *QueryEstimateSwapResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_QueryEstimateSwapResponse.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *QueryEstimateSwapResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_QueryEstimateSwapResponse.Merge(m, src)
+}
+func (m *QueryEstimateSwapResponse) XXX_Size() int {
+	return m.Size()
+}
+func (m *QueryEstimateSwapResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_QueryEstimateSwapResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_QueryEstimateSwapResponse proto.InternalMessageInfo
+
+func (m *QueryEstimateSwapResponse) GetCoin() types.DecCoin {
+	if m != nil {
+		return m.Coin
+	}
+	return types.DecCoin{}
+}
+
 func init() {
 	proto.RegisterType((*QueryParamsRequest)(nil), "hupayxcom.taycanswap.taycanswap.QueryParamsRequest")
 	proto.RegisterType((*QueryParamsResponse)(nil), "hupayxcom.taycanswap.taycanswap.QueryParamsResponse")
+	proto.RegisterType((*QueryEstimateSwapRequest)(nil), "hupayxcom.taycanswap.taycanswap.QueryEstimateSwapRequest")
+	proto.RegisterType((*QueryEstimateSwapResponse)(nil), "hupayxcom.taycanswap.taycanswap.QueryEstimateSwapResponse")
 }
 
 func init() { proto.RegisterFile("taycanswap/query.proto", fileDescriptor_dca2c4272acc6bc0) }
 
 var fileDescriptor_dca2c4272acc6bc0 = []byte{
-	// 311 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xe2, 0x12, 0x2b, 0x49, 0xac, 0x4c,
-	0x4e, 0xcc, 0x2b, 0x2e, 0x4f, 0x2c, 0xd0, 0x2f, 0x2c, 0x4d, 0x2d, 0xaa, 0xd4, 0x2b, 0x28, 0xca,
-	0x2f, 0xc9, 0x17, 0x92, 0xcf, 0x28, 0x2d, 0x48, 0xac, 0xac, 0x48, 0xce, 0xcf, 0xd5, 0x43, 0xa8,
-	0x40, 0x62, 0x4a, 0x89, 0xa4, 0xe7, 0xa7, 0xe7, 0x83, 0xd5, 0xea, 0x83, 0x58, 0x10, 0x6d, 0x52,
-	0x32, 0xe9, 0xf9, 0xf9, 0xe9, 0x39, 0xa9, 0xfa, 0x89, 0x05, 0x99, 0xfa, 0x89, 0x79, 0x79, 0xf9,
-	0x25, 0x89, 0x25, 0x99, 0xf9, 0x79, 0xc5, 0x50, 0x59, 0xad, 0xe4, 0xfc, 0xe2, 0xdc, 0xfc, 0x62,
-	0xfd, 0xa4, 0xc4, 0xe2, 0x54, 0x88, 0x6d, 0xfa, 0x65, 0x86, 0x49, 0xa9, 0x25, 0x89, 0x86, 0xfa,
-	0x05, 0x89, 0xe9, 0x99, 0x79, 0x60, 0xc5, 0x50, 0xb5, 0xe2, 0x48, 0x0e, 0x2b, 0x48, 0x2c, 0x4a,
-	0xcc, 0x85, 0x1a, 0xa2, 0x24, 0xc2, 0x25, 0x14, 0x08, 0xd2, 0x1a, 0x00, 0x16, 0x0c, 0x4a, 0x2d,
-	0x2c, 0x4d, 0x2d, 0x2e, 0x51, 0x8a, 0xe1, 0x12, 0x46, 0x11, 0x2d, 0x2e, 0xc8, 0xcf, 0x2b, 0x4e,
-	0x15, 0x72, 0xe5, 0x62, 0x83, 0x68, 0x96, 0x60, 0x54, 0x60, 0xd4, 0xe0, 0x36, 0x52, 0xd7, 0x23,
-	0xe0, 0x2f, 0x3d, 0x88, 0x01, 0x4e, 0x2c, 0x27, 0xee, 0xc9, 0x33, 0x04, 0x41, 0x35, 0x1b, 0xad,
-	0x63, 0xe4, 0x62, 0x05, 0x1b, 0x2f, 0xb4, 0x84, 0x91, 0x8b, 0x0d, 0xa2, 0x44, 0xc8, 0x98, 0xa0,
-	0x59, 0x98, 0xee, 0x94, 0x32, 0x21, 0x4d, 0x13, 0xc4, 0x1b, 0x4a, 0xfa, 0x4d, 0x97, 0x9f, 0x4c,
-	0x66, 0xd2, 0x14, 0x52, 0xd7, 0x87, 0xeb, 0xd6, 0x47, 0x0a, 0x1f, 0x8c, 0xa0, 0x72, 0xf2, 0x3d,
-	0xf1, 0x48, 0x8e, 0xf1, 0xc2, 0x23, 0x39, 0xc6, 0x07, 0x8f, 0xe4, 0x18, 0x27, 0x3c, 0x96, 0x63,
-	0xb8, 0xf0, 0x58, 0x8e, 0xe1, 0xc6, 0x63, 0x39, 0x86, 0x28, 0xe3, 0xf4, 0xcc, 0x92, 0x8c, 0xd2,
-	0x24, 0x3d, 0x90, 0x11, 0x10, 0xc3, 0x74, 0x11, 0xa6, 0x05, 0x83, 0x8c, 0xa8, 0x40, 0x31, 0xba,
-	0xb2, 0x20, 0xb5, 0x38, 0x89, 0x0d, 0x1c, 0xf4, 0xc6, 0x80, 0x00, 0x00, 0x00, 0xff, 0xff, 0xa3,
-	0x8d, 0x78, 0xdd, 0x2e, 0x02, 0x00, 0x00,
+	// 418 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x9c, 0x92, 0xc1, 0x8e, 0x12, 0x31,
+	0x1c, 0xc6, 0x67, 0x08, 0x72, 0xa8, 0x9e, 0x2a, 0x51, 0x98, 0x90, 0xc1, 0xcc, 0x05, 0x35, 0xb1,
+	0x15, 0xc6, 0x90, 0xe8, 0x11, 0xe5, 0x68, 0x54, 0xb8, 0x19, 0x2f, 0x9d, 0x49, 0x33, 0x4c, 0xe2,
+	0x4c, 0x0b, 0xed, 0x08, 0x73, 0xf5, 0x09, 0x4c, 0x7c, 0x05, 0x5f, 0xc3, 0x3b, 0x47, 0x12, 0x2f,
+	0x9e, 0x36, 0x1b, 0xd8, 0xf3, 0x3e, 0xc3, 0x66, 0xda, 0xb2, 0x3b, 0x2c, 0x6c, 0xd8, 0xdd, 0xdb,
+	0x3f, 0xcd, 0xff, 0xfb, 0x7d, 0xdf, 0xd7, 0x16, 0x3c, 0x91, 0x24, 0x0f, 0x49, 0x2a, 0xe6, 0x84,
+	0xe3, 0x69, 0x46, 0x67, 0x39, 0xe2, 0x33, 0x26, 0x19, 0x6c, 0x4f, 0x32, 0x4e, 0xf2, 0x45, 0xc8,
+	0x12, 0x74, 0xb5, 0x51, 0x1a, 0x9d, 0x56, 0xc4, 0x58, 0xf4, 0x9d, 0x62, 0xc2, 0x63, 0x4c, 0xd2,
+	0x94, 0x49, 0x22, 0x63, 0x96, 0x0a, 0x2d, 0x77, 0x5e, 0x86, 0x4c, 0x24, 0x4c, 0xe0, 0x80, 0x08,
+	0xaa, 0xb9, 0xf8, 0x47, 0x37, 0xa0, 0x92, 0x74, 0x31, 0x27, 0x51, 0x9c, 0xaa, 0x65, 0xb3, 0xfb,
+	0xb4, 0x14, 0x81, 0x93, 0x19, 0x49, 0xb6, 0x10, 0xb7, 0x0c, 0xd9, 0xca, 0x43, 0x16, 0x6f, 0x85,
+	0xf5, 0x88, 0x45, 0x4c, 0x8d, 0xb8, 0x98, 0xf4, 0xa9, 0x57, 0x07, 0xf0, 0x4b, 0x61, 0xf8, 0x59,
+	0xa1, 0x46, 0x74, 0x9a, 0x51, 0x21, 0xbd, 0x6f, 0xe0, 0xf1, 0xce, 0xa9, 0xe0, 0x2c, 0x15, 0x14,
+	0x0e, 0x41, 0x4d, 0x5b, 0x36, 0xec, 0x67, 0xf6, 0xf3, 0x87, 0xbd, 0x0e, 0x3a, 0xd2, 0x1b, 0x69,
+	0xc0, 0xa0, 0xba, 0x3c, 0x69, 0x5b, 0x23, 0x23, 0xf6, 0x3e, 0x81, 0x86, 0xa2, 0x0f, 0x85, 0x8c,
+	0x13, 0x22, 0xe9, 0x78, 0x4e, 0xb8, 0x71, 0x86, 0x3e, 0xa8, 0x16, 0x99, 0x8d, 0x41, 0x13, 0xe9,
+	0x52, 0xa8, 0x28, 0x85, 0x4c, 0x29, 0xf4, 0x9e, 0xc5, 0xa9, 0x41, 0xaa, 0x65, 0x6f, 0x0c, 0x9a,
+	0x07, 0x80, 0x26, 0x74, 0x7f, 0x87, 0xd8, 0x3a, 0x48, 0xfc, 0x40, 0xc3, 0xeb, 0xd0, 0xde, 0x79,
+	0x05, 0x3c, 0x50, 0x54, 0xf8, 0xc7, 0x06, 0x35, 0x5d, 0x04, 0xfa, 0x47, 0x1b, 0xef, 0xdf, 0xa6,
+	0xf3, 0xe6, 0x6e, 0x22, 0x9d, 0xdb, 0xc3, 0x3f, 0xff, 0x9d, 0xfd, 0xae, 0xbc, 0x80, 0x1d, 0x7c,
+	0xa9, 0xc6, 0xa5, 0xb7, 0xdf, 0xfb, 0x06, 0xf0, 0xaf, 0x0d, 0x1e, 0x95, 0x6f, 0x00, 0xbe, 0xbd,
+	0x9d, 0xef, 0x81, 0x67, 0x70, 0xde, 0xdd, 0x47, 0x6a, 0x82, 0xf7, 0x55, 0xf0, 0xd7, 0x10, 0x99,
+	0xe0, 0xaf, 0x6e, 0x4e, 0x4e, 0x4b, 0xfa, 0xc1, 0xc7, 0xe5, 0xda, 0xb5, 0x57, 0x6b, 0xd7, 0x3e,
+	0x5d, 0xbb, 0xf6, 0xaf, 0x8d, 0x6b, 0xad, 0x36, 0xae, 0xf5, 0x7f, 0xe3, 0x5a, 0x5f, 0xfd, 0x28,
+	0x96, 0x93, 0x2c, 0x40, 0x05, 0x68, 0x8f, 0x59, 0x68, 0xf1, 0x62, 0xc7, 0x20, 0xe7, 0x54, 0x04,
+	0x35, 0xf5, 0xc1, 0xfd, 0x8b, 0x00, 0x00, 0x00, 0xff, 0xff, 0x1b, 0x22, 0xbf, 0x60, 0xb4, 0x03,
+	0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -158,6 +256,8 @@ const _ = grpc.SupportPackageIsVersion4
 type QueryClient interface {
 	// Parameters queries the parameters of the module.
 	Params(ctx context.Context, in *QueryParamsRequest, opts ...grpc.CallOption) (*QueryParamsResponse, error)
+	// Queries a list of estimateSwap items.
+	EstimateSwap(ctx context.Context, in *QueryEstimateSwapRequest, opts ...grpc.CallOption) (*QueryEstimateSwapResponse, error)
 }
 
 type queryClient struct {
@@ -177,10 +277,21 @@ func (c *queryClient) Params(ctx context.Context, in *QueryParamsRequest, opts .
 	return out, nil
 }
 
+func (c *queryClient) EstimateSwap(ctx context.Context, in *QueryEstimateSwapRequest, opts ...grpc.CallOption) (*QueryEstimateSwapResponse, error) {
+	out := new(QueryEstimateSwapResponse)
+	err := c.cc.Invoke(ctx, "/hupayxcom.taycanswap.taycanswap.Query/EstimateSwap", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // QueryServer is the server API for Query service.
 type QueryServer interface {
 	// Parameters queries the parameters of the module.
 	Params(context.Context, *QueryParamsRequest) (*QueryParamsResponse, error)
+	// Queries a list of estimateSwap items.
+	EstimateSwap(context.Context, *QueryEstimateSwapRequest) (*QueryEstimateSwapResponse, error)
 }
 
 // UnimplementedQueryServer can be embedded to have forward compatible implementations.
@@ -189,6 +300,9 @@ type UnimplementedQueryServer struct {
 
 func (*UnimplementedQueryServer) Params(ctx context.Context, req *QueryParamsRequest) (*QueryParamsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Params not implemented")
+}
+func (*UnimplementedQueryServer) EstimateSwap(ctx context.Context, req *QueryEstimateSwapRequest) (*QueryEstimateSwapResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method EstimateSwap not implemented")
 }
 
 func RegisterQueryServer(s grpc1.Server, srv QueryServer) {
@@ -213,6 +327,24 @@ func _Query_Params_Handler(srv interface{}, ctx context.Context, dec func(interf
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Query_EstimateSwap_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryEstimateSwapRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(QueryServer).EstimateSwap(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/hupayxcom.taycanswap.taycanswap.Query/EstimateSwap",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(QueryServer).EstimateSwap(ctx, req.(*QueryEstimateSwapRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _Query_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "hupayxcom.taycanswap.taycanswap.Query",
 	HandlerType: (*QueryServer)(nil),
@@ -220,6 +352,10 @@ var _Query_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Params",
 			Handler:    _Query_Params_Handler,
+		},
+		{
+			MethodName: "EstimateSwap",
+			Handler:    _Query_EstimateSwap_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
@@ -282,6 +418,72 @@ func (m *QueryParamsResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+func (m *QueryEstimateSwapRequest) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryEstimateSwapRequest) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryEstimateSwapRequest) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	{
+		size, err := m.Coin.MarshalToSizedBuffer(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarintQuery(dAtA, i, uint64(size))
+	}
+	i--
+	dAtA[i] = 0xa
+	return len(dAtA) - i, nil
+}
+
+func (m *QueryEstimateSwapResponse) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *QueryEstimateSwapResponse) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *QueryEstimateSwapResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	{
+		size, err := m.Coin.MarshalToSizedBuffer(dAtA[:i])
+		if err != nil {
+			return 0, err
+		}
+		i -= size
+		i = encodeVarintQuery(dAtA, i, uint64(size))
+	}
+	i--
+	dAtA[i] = 0xa
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintQuery(dAtA []byte, offset int, v uint64) int {
 	offset -= sovQuery(v)
 	base := offset
@@ -309,6 +511,28 @@ func (m *QueryParamsResponse) Size() (n int) {
 	var l int
 	_ = l
 	l = m.Params.Size()
+	n += 1 + l + sovQuery(uint64(l))
+	return n
+}
+
+func (m *QueryEstimateSwapRequest) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = m.Coin.Size()
+	n += 1 + l + sovQuery(uint64(l))
+	return n
+}
+
+func (m *QueryEstimateSwapResponse) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = m.Coin.Size()
 	n += 1 + l + sovQuery(uint64(l))
 	return n
 }
@@ -428,6 +652,172 @@ func (m *QueryParamsResponse) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			if err := m.Params.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryEstimateSwapRequest) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryEstimateSwapRequest: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryEstimateSwapRequest: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Coin", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.Coin.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipQuery(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *QueryEstimateSwapResponse) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowQuery
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: QueryEstimateSwapResponse: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: QueryEstimateSwapResponse: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Coin", wireType)
+			}
+			var msglen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowQuery
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				msglen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if msglen < 0 {
+				return ErrInvalidLengthQuery
+			}
+			postIndex := iNdEx + msglen
+			if postIndex < 0 {
+				return ErrInvalidLengthQuery
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.Coin.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
