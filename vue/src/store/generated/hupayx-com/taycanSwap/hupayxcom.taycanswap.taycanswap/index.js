@@ -2,7 +2,8 @@ import { txClient, queryClient, MissingWalletError, registry } from './module';
 // @ts-ignore
 import { SpVuexError } from '@starport/vuex';
 import { Params } from "./module/types/taycanswap/params";
-export { Params };
+import { Supply } from "./module/types/taycanswap/params";
+export { Params, Supply };
 async function initTxClient(vuexGetters) {
     return await txClient(vuexGetters['common/wallet/signer'], {
         addr: vuexGetters['common/env/apiTendermint']
@@ -40,6 +41,7 @@ const getDefaultState = () => {
         EstimateSwap: {},
         _Structure: {
             Params: getStructure(Params.fromPartial({})),
+            Supply: getStructure(Supply.fromPartial({})),
         },
         _Registry: registry,
         _Subscriptions: new Set(),

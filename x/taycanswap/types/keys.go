@@ -17,6 +17,10 @@ const (
 	MemStoreKey = "mem_taycanswap"
 )
 
+var (
+	SupplyKey = []byte{0x11}
+)
+
 func KeyPrefix(p string) []byte {
 	return []byte(p)
 }

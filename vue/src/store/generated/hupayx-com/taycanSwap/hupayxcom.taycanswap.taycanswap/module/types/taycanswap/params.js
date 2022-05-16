@@ -2,28 +2,36 @@
 import { Writer, Reader } from "protobufjs/minimal";
 export const protobufPackage = "hupayxcom.taycanswap.taycanswap";
 const baseParams = {
-    swapCommition: "",
+    swapPreCommition: "",
+    swapPostCommition: "",
     swapRestEndpoint: "",
     swapBaseDenom: "",
     swapTokenId: "",
+    swapAmount: "",
     swapEnabled: false,
 };
 export const Params = {
     encode(message, writer = Writer.create()) {
-        if (message.swapCommition !== "") {
-            writer.uint32(10).string(message.swapCommition);
+        if (message.swapPreCommition !== "") {
+            writer.uint32(10).string(message.swapPreCommition);
+        }
+        if (message.swapPostCommition !== "") {
+            writer.uint32(18).string(message.swapPostCommition);
         }
         if (message.swapRestEndpoint !== "") {
-            writer.uint32(18).string(message.swapRestEndpoint);
+            writer.uint32(26).string(message.swapRestEndpoint);
         }
         if (message.swapBaseDenom !== "") {
-            writer.uint32(26).string(message.swapBaseDenom);
+            writer.uint32(34).string(message.swapBaseDenom);
         }
         if (message.swapTokenId !== "") {
-            writer.uint32(34).string(message.swapTokenId);
+            writer.uint32(42).string(message.swapTokenId);
+        }
+        if (message.swapAmount !== "") {
+            writer.uint32(50).string(message.swapAmount);
         }
         if (message.swapEnabled === true) {
-            writer.uint32(40).bool(message.swapEnabled);
+            writer.uint32(56).bool(message.swapEnabled);
         }
         return writer;
     },
@@ -35,18 +43,24 @@ export const Params = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.swapCommition = reader.string();
+                    message.swapPreCommition = reader.string();
                     break;
                 case 2:
-                    message.swapRestEndpoint = reader.string();
+                    message.swapPostCommition = reader.string();
                     break;
                 case 3:
-                    message.swapBaseDenom = reader.string();
+                    message.swapRestEndpoint = reader.string();
                     break;
                 case 4:
-                    message.swapTokenId = reader.string();
+                    message.swapBaseDenom = reader.string();
                     break;
                 case 5:
+                    message.swapTokenId = reader.string();
+                    break;
+                case 6:
+                    message.swapAmount = reader.string();
+                    break;
+                case 7:
                     message.swapEnabled = reader.bool();
                     break;
                 default:
@@ -58,11 +72,19 @@ export const Params = {
     },
     fromJSON(object) {
         const message = { ...baseParams };
-        if (object.swapCommition !== undefined && object.swapCommition !== null) {
-            message.swapCommition = String(object.swapCommition);
+        if (object.swapPreCommition !== undefined &&
+            object.swapPreCommition !== null) {
+            message.swapPreCommition = String(object.swapPreCommition);
         }
         else {
-            message.swapCommition = "";
+            message.swapPreCommition = "";
+        }
+        if (object.swapPostCommition !== undefined &&
+            object.swapPostCommition !== null) {
+            message.swapPostCommition = String(object.swapPostCommition);
+        }
+        else {
+            message.swapPostCommition = "";
         }
         if (object.swapRestEndpoint !== undefined &&
             object.swapRestEndpoint !== null) {
@@ -83,6 +105,12 @@ export const Params = {
         else {
             message.swapTokenId = "";
         }
+        if (object.swapAmount !== undefined && object.swapAmount !== null) {
+            message.swapAmount = String(object.swapAmount);
+        }
+        else {
+            message.swapAmount = "";
+        }
         if (object.swapEnabled !== undefined && object.swapEnabled !== null) {
             message.swapEnabled = Boolean(object.swapEnabled);
         }
@@ -93,25 +121,36 @@ export const Params = {
     },
     toJSON(message) {
         const obj = {};
-        message.swapCommition !== undefined &&
-            (obj.swapCommition = message.swapCommition);
+        message.swapPreCommition !== undefined &&
+            (obj.swapPreCommition = message.swapPreCommition);
+        message.swapPostCommition !== undefined &&
+            (obj.swapPostCommition = message.swapPostCommition);
         message.swapRestEndpoint !== undefined &&
             (obj.swapRestEndpoint = message.swapRestEndpoint);
         message.swapBaseDenom !== undefined &&
             (obj.swapBaseDenom = message.swapBaseDenom);
         message.swapTokenId !== undefined &&
             (obj.swapTokenId = message.swapTokenId);
+        message.swapAmount !== undefined && (obj.swapAmount = message.swapAmount);
         message.swapEnabled !== undefined &&
             (obj.swapEnabled = message.swapEnabled);
         return obj;
     },
     fromPartial(object) {
         const message = { ...baseParams };
-        if (object.swapCommition !== undefined && object.swapCommition !== null) {
-            message.swapCommition = object.swapCommition;
+        if (object.swapPreCommition !== undefined &&
+            object.swapPreCommition !== null) {
+            message.swapPreCommition = object.swapPreCommition;
         }
         else {
-            message.swapCommition = "";
+            message.swapPreCommition = "";
+        }
+        if (object.swapPostCommition !== undefined &&
+            object.swapPostCommition !== null) {
+            message.swapPostCommition = object.swapPostCommition;
+        }
+        else {
+            message.swapPostCommition = "";
         }
         if (object.swapRestEndpoint !== undefined &&
             object.swapRestEndpoint !== null) {
@@ -132,11 +171,69 @@ export const Params = {
         else {
             message.swapTokenId = "";
         }
+        if (object.swapAmount !== undefined && object.swapAmount !== null) {
+            message.swapAmount = object.swapAmount;
+        }
+        else {
+            message.swapAmount = "";
+        }
         if (object.swapEnabled !== undefined && object.swapEnabled !== null) {
             message.swapEnabled = object.swapEnabled;
         }
         else {
             message.swapEnabled = false;
+        }
+        return message;
+    },
+};
+const baseSupply = { SupplyAmount: "" };
+export const Supply = {
+    encode(message, writer = Writer.create()) {
+        if (message.SupplyAmount !== "") {
+            writer.uint32(10).string(message.SupplyAmount);
+        }
+        return writer;
+    },
+    decode(input, length) {
+        const reader = input instanceof Uint8Array ? new Reader(input) : input;
+        let end = length === undefined ? reader.len : reader.pos + length;
+        const message = { ...baseSupply };
+        while (reader.pos < end) {
+            const tag = reader.uint32();
+            switch (tag >>> 3) {
+                case 1:
+                    message.SupplyAmount = reader.string();
+                    break;
+                default:
+                    reader.skipType(tag & 7);
+                    break;
+            }
+        }
+        return message;
+    },
+    fromJSON(object) {
+        const message = { ...baseSupply };
+        if (object.SupplyAmount !== undefined && object.SupplyAmount !== null) {
+            message.SupplyAmount = String(object.SupplyAmount);
+        }
+        else {
+            message.SupplyAmount = "";
+        }
+        return message;
+    },
+    toJSON(message) {
+        const obj = {};
+        message.SupplyAmount !== undefined &&
+            (obj.SupplyAmount = message.SupplyAmount);
+        return obj;
+    },
+    fromPartial(object) {
+        const message = { ...baseSupply };
+        if (object.SupplyAmount !== undefined && object.SupplyAmount !== null) {
+            message.SupplyAmount = object.SupplyAmount;
+        }
+        else {
+            message.SupplyAmount = "";
         }
         return message;
     },

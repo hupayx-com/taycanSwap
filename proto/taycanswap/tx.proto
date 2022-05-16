@@ -15,7 +15,7 @@ service Msg {
 
 message MsgTaycanSwap {
   string creator = 1;
-  cosmos.base.v1beta1.DecCoin coin = 2 [(gogoproto.nullable) = false];
+  cosmos.base.v1beta1.Coin coin = 2 [(gogoproto.nullable) = false];
 }
 
 message MsgTaycanSwapResponse {

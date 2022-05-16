@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { Reader, Writer } from "protobufjs/minimal";
-import { DecCoin } from "../cosmos/base/v1beta1/coin";
+import { Coin } from "../cosmos/base/v1beta1/coin";
 export const protobufPackage = "hupayxcom.taycanswap.taycanswap";
 const baseMsgTaycanSwap = { creator: "" };
 export const MsgTaycanSwap = {
@@ -9,7 +9,7 @@ export const MsgTaycanSwap = {
             writer.uint32(10).string(message.creator);
         }
         if (message.coin !== undefined) {
-            DecCoin.encode(message.coin, writer.uint32(18).fork()).ldelim();
+            Coin.encode(message.coin, writer.uint32(18).fork()).ldelim();
         }
         return writer;
     },
@@ -24,7 +24,7 @@ export const MsgTaycanSwap = {
                     message.creator = reader.string();
                     break;
                 case 2:
-                    message.coin = DecCoin.decode(reader, reader.uint32());
+                    message.coin = Coin.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -42,7 +42,7 @@ export const MsgTaycanSwap = {
             message.creator = "";
         }
         if (object.coin !== undefined && object.coin !== null) {
-            message.coin = DecCoin.fromJSON(object.coin);
+            message.coin = Coin.fromJSON(object.coin);
         }
         else {
             message.coin = undefined;
@@ -53,7 +53,7 @@ export const MsgTaycanSwap = {
         const obj = {};
         message.creator !== undefined && (obj.creator = message.creator);
         message.coin !== undefined &&
-            (obj.coin = message.coin ? DecCoin.toJSON(message.coin) : undefined);
+            (obj.coin = message.coin ? Coin.toJSON(message.coin) : undefined);
         return obj;
     },
     fromPartial(object) {
@@ -65,7 +65,7 @@ export const MsgTaycanSwap = {
             message.creator = "";
         }
         if (object.coin !== undefined && object.coin !== null) {
-            message.coin = DecCoin.fromPartial(object.coin);
+            message.coin = Coin.fromPartial(object.coin);
         }
         else {
             message.coin = undefined;

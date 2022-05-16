@@ -1,6 +1,7 @@
 package cli
 
 import (
+	"fmt"
 	"strconv"
 
 	"github.com/cosmos/cosmos-sdk/client"
@@ -27,21 +28,20 @@ func CmdEstimateSwap() *cobra.Command {
 				return err
 			}
 
-			baseDenom, err := sdk.GetBaseDenom()
-
-			if err != nil {
-				return err
-			}
-
-			// baseDenom이 아니면 바꿔쓰자..
-			if reqCoin.Denom != baseDenom {
+			// sfd일때만 asfd로 바꿔주자
+			if reqCoin.Denom == "sfd" {
 				reqDecCoin, _ := sdk.ParseDecCoin(args[0])
 				dstUnit, _ := sdk.GetDenomUnit("asfd")
 				reqCoin = sdk.NewCoin("asfd", reqDecCoin.Amount.Quo(dstUnit).TruncateInt())
 			}
 
+			baseDenom, err := sdk.GetBaseDenom()
 			if err != nil {
 				return err
+			}
+
+			if !(reqCoin.Denom == baseDenom || reqCoin.Denom == "asfd") {
+				return fmt.Errorf(reqCoin.Denom)
 			}
 
 			clientCtx, err := client.GetClientTxContext(cmd)
@@ -50,6 +50,8 @@ func CmdEstimateSwap() *cobra.Command {
 			}
 
 			queryClient := types.NewQueryClient(clientCtx)
+
+			fmt.Println(reqCoin)
 
 			params := &types.QueryEstimateSwapRequest{
 				Coin: reqCoin,

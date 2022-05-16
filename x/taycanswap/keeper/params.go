@@ -27,8 +27,18 @@ func (k Keeper) SetBaseDenom(ctx sdk.Context, denom string) {
 }
 
 // SetSwapCommition set's the base fee in the paramSpace
-func (k Keeper) SetSwapCommition(ctx sdk.Context, commition float64) {
-	k.paramstore.Set(ctx, types.ParamStoreKeySwapCommition, commition)
+func (k Keeper) SetSwapPreCommition(ctx sdk.Context, commition float64) {
+	k.paramstore.Set(ctx, types.ParamStoreKeySwapPreCommition, commition)
+}
+
+// SetSwapCommition set's the base fee in the paramSpace
+func (k Keeper) SetSwapAmount(ctx sdk.Context, amount string) {
+	k.paramstore.Set(ctx, types.ParamStoreKeySwapAmount, amount)
+}
+
+// SetSwapCommition set's the base fee in the paramSpace
+func (k Keeper) SetSwapPostCommition(ctx sdk.Context, commition float64) {
+	k.paramstore.Set(ctx, types.ParamStoreKeySwapPostCommition, commition)
 }
 
 // SetSwapEnabled set's the base fee in the paramSpace

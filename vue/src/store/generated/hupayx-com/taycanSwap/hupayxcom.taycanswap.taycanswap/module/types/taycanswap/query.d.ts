@@ -1,6 +1,6 @@
 import { Reader, Writer } from "protobufjs/minimal";
 import { Params } from "../taycanswap/params";
-import { DecCoin } from "../cosmos/base/v1beta1/coin";
+import { Coin, DecCoin } from "../cosmos/base/v1beta1/coin";
 export declare const protobufPackage = "hupayxcom.taycanswap.taycanswap";
 /** QueryParamsRequest is request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {
@@ -11,7 +11,7 @@ export interface QueryParamsResponse {
     params: Params | undefined;
 }
 export interface QueryEstimateSwapRequest {
-    coin: DecCoin | undefined;
+    coin: Coin | undefined;
 }
 export interface QueryEstimateSwapResponse {
     coin: DecCoin | undefined;

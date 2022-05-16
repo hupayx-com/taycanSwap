@@ -3,9 +3,10 @@ import { txClient, queryClient, MissingWalletError , registry} from './module'
 import { SpVuexError } from '@starport/vuex'
 
 import { Params } from "./module/types/taycanswap/params"
+import { Supply } from "./module/types/taycanswap/params"
 
 
-export { Params };
+export { Params, Supply };
 
 async function initTxClient(vuexGetters) {
 	return await txClient(vuexGetters['common/wallet/signer'], {
@@ -48,6 +49,7 @@ const getDefaultState = () => {
 				
 				_Structure: {
 						Params: getStructure(Params.fromPartial({})),
+						Supply: getStructure(Supply.fromPartial({})),
 						
 		},
 		_Registry: registry,

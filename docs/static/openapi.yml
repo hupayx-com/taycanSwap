@@ -5634,13 +5634,17 @@ paths:
                 description: params holds all the parameters of this module.
                 type: object
                 properties:
-                  swapCommition:
+                  swapPreCommition:
+                    type: string
+                  swapPostCommition:
                     type: string
                   swapRestEndpoint:
                     type: string
                   swapBaseDenom:
                     type: string
                   swapTokenId:
+                    type: string
+                  swapAmount:
                     type: string
                   swapEnabled:
                     type: boolean
@@ -10458,13 +10462,17 @@ definitions:
   hupayxcom.taycanswap.taycanswap.Params:
     type: object
     properties:
-      swapCommition:
+      swapPreCommition:
+        type: string
+      swapPostCommition:
         type: string
       swapRestEndpoint:
         type: string
       swapBaseDenom:
         type: string
       swapTokenId:
+        type: string
+      swapAmount:
         type: string
       swapEnabled:
         type: boolean
@@ -10491,13 +10499,17 @@ definitions:
         description: params holds all the parameters of this module.
         type: object
         properties:
-          swapCommition:
+          swapPreCommition:
+            type: string
+          swapPostCommition:
             type: string
           swapRestEndpoint:
             type: string
           swapBaseDenom:
             type: string
           swapTokenId:
+            type: string
+          swapAmount:
             type: string
           swapEnabled:
             type: boolean

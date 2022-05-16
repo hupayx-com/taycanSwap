@@ -354,7 +354,7 @@ func New(
 		appCodec,
 		keys[taycanswapmoduletypes.StoreKey],
 		keys[taycanswapmoduletypes.MemStoreKey],
-		// app.BankKeeper,
+		app.BankKeeper,
 		app.GetSubspace(taycanswapmoduletypes.ModuleName),
 	)
 	taycanswapModule := taycanswapmodule.NewAppModule(appCodec, app.TaycanswapKeeper, app.AccountKeeper, app.BankKeeper)

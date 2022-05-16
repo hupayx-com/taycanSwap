@@ -35,12 +35,12 @@ func getPrice(denom string, url string) (error, sdk.Dec) {
 	return nil, usdPrice
 }
 
-func swapCoin(price sdk.Dec, amount sdk.Dec, commition sdk.Dec) sdk.Dec {
-	cnt := amount.Mul(price).Mul(commition)
+func swapCoin(price sdk.Dec, amount sdk.Dec) sdk.Dec {
+	cnt := amount.Mul(price)
 	return cnt
 }
 
-func swapDollar(price sdk.Dec, amount sdk.Dec, commition sdk.Dec) sdk.Dec {
-	cnt := amount.Quo(price).Mul(commition)
+func swapDollar(price sdk.Dec, amount sdk.Dec) sdk.Dec {
+	cnt := amount.Quo(price)
 	return cnt
 }

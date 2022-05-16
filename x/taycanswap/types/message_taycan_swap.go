@@ -9,7 +9,7 @@ const TypeMsgTaycanSwap = "taycan_swap"
 
 var _ sdk.Msg = &MsgTaycanSwap{}
 
-func NewMsgTaycanSwap(creator string, coin sdk.DecCoin) *MsgTaycanSwap {
+func NewMsgTaycanSwap(creator string, coin sdk.Coin) *MsgTaycanSwap {
 	return &MsgTaycanSwap{
 		Creator: creator,
 		Coin:    coin,

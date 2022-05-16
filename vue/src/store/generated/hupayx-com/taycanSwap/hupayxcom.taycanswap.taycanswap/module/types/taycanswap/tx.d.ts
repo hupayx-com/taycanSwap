@@ -1,9 +1,9 @@
 import { Reader, Writer } from "protobufjs/minimal";
-import { DecCoin } from "../cosmos/base/v1beta1/coin";
+import { Coin } from "../cosmos/base/v1beta1/coin";
 export declare const protobufPackage = "hupayxcom.taycanswap.taycanswap";
 export interface MsgTaycanSwap {
     creator: string;
-    coin: DecCoin | undefined;
+    coin: Coin | undefined;
 }
 export interface MsgTaycanSwapResponse {
 }

@@ -1,7 +1,9 @@
 package cli
 
 import (
+	"fmt"
 	"strconv"
+	"strings"
 
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
@@ -19,10 +21,22 @@ func CmdTaycanSwap() *cobra.Command {
 		Short: "Broadcast message taycanSwap",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
-			// argCoin, err := sdk.ParseCoinNormalized(args[0])
-			argCoin, err := sdk.ParseDecCoin(args[0])
+			var argCoin sdk.Coin
+
+			if strings.Index(args[0], "asfd") > 0 {
+				return fmt.Errorf("not allowed denom %s", args[0])
+			}
+
+			argCoin, err = sdk.ParseCoinNormalized(args[0])
 			if err != nil {
 				return err
+			}
+
+			// sfd일때만 asfd로 바꿔주자
+			if argCoin.Denom == "sfd" {
+				reqDecCoin, _ := sdk.ParseDecCoin(args[0])
+				dstUnit, _ := sdk.GetDenomUnit("asfd")
+				argCoin = sdk.NewCoin("asfd", reqDecCoin.Amount.Quo(dstUnit).TruncateInt())
 			}
 
 			clientCtx, err := client.GetClientTxContext(cmd)

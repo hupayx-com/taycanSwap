@@ -42,6 +42,26 @@ func TestGetPrice(t *testing.T) {
 	// fmt.Printf("%f", usd)
 }
 
+func TestSwapRate2(t *testing.T) {
+
+	registerCoin()
+	reqCoin, err := sdk.ParseCoinNormalized("100sfl")
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	fmt.Println(reqCoin)
+	commition := sdk.NewDecWithPrec(98, 2)
+	usdPrice := sdk.NewDecWithPrec(0.057*10000000000, 10)
+
+	coin := swapCoin(usdPrice, reqCoin.Amount, commition)
+	unit := sdk.NewDecWithPrec(1, 18)
+	result := sdk.NewDecCoinFromDec("sfd", coin.Mul(unit))
+	fmt.Println(result)
+
+}
+
 func TestSwapRate(t *testing.T) {
 	fmt.Printf("%f ,", SwapCoin(200))
 	fmt.Println(float64(200) * 0.08711)
@@ -116,6 +136,12 @@ func TestConvertCoin(t *testing.T) {
 
 }
 
+func TestBaseDenom(t *testing.T) {
+	registerCoin()
+	unit, _ := sdk.GetDenomUnit("asfd")
+	fmt.Println(unit.BigInt().Int64())
+}
+
 func TestConvertCoin2(t *testing.T) {
 	registerCoin()
 	args := "97.657sfd"
@@ -126,26 +152,26 @@ func TestConvertCoin2(t *testing.T) {
 	fmt.Println(reqCoin.Amount.Quo(dstUnit).TruncateInt())
 }
 
-func TestSwapCoin(t *testing.T) {
-	commition := sdk.NewDecWithPrec(98, 2)
-	usdPrice := sdk.NewDecWithPrec(0.1*10000000000, 10)
-	amount := sdk.NewDecWithPrec(100, 1)
+// func TestSwapCoin(t *testing.T) {
+// 	commition := sdk.NewDecWithPrec(98, 2)
+// 	usdPrice := sdk.NewDecWithPrec(0.1*10000000000, 10)
+// 	amount := sdk.NewDecWithPrec(100, 1)
 
-	coin := swapCoin(usdPrice, amount, commition)
-	fmt.Println(coin)
-}
+// 	// coin := swapCoin(usdPrice, amount, commition)
+// 	// fmt.Println(coin)
+// }
 
-func TestSwapDollar(t *testing.T) {
-	commition := sdk.NewDecWithPrec(98, 2)
-	fmt.Println(commition)
-	usdPrice := sdk.NewDecWithPrec(0.1*10000000000, 10)
-	fmt.Println(usdPrice)
-	amount := sdk.NewDecWithPrec(1, 0)
-	fmt.Println(amount)
+// func TestSwapDollar(t *testing.T) {
+// 	commition := sdk.NewDecWithPrec(98, 2)
+// 	fmt.Println(commition)
+// 	usdPrice := sdk.NewDecWithPrec(0.1*10000000000, 10)
+// 	fmt.Println(usdPrice)
+// 	amount := sdk.NewDecWithPrec(1, 0)
+// 	fmt.Println(amount)
 
-	coin := swapDollar(usdPrice, amount, commition)
-	fmt.Println(coin)
-}
+// 	coin := swapDollar(usdPrice, amount, commition)
+// 	fmt.Println(coin)
+// }
 
 func TestDcoin(t *testing.T) {
 	usdPrice := sdk.NewDecWithPrec(int64(0.00876*10000000000), 10)
@@ -162,21 +188,12 @@ func TestDcoin(t *testing.T) {
 // 	return sdk.NewCoin("sfl", sdk.NewInt(cnt))
 // }
 
-func swapCoin(price sdk.Dec, amount sdk.Dec, commition sdk.Dec) sdk.DecCoin {
-
-	cnt := amount.Mul(price).Mul(commition)
-
-	fmt.Println("swapCoin : ----------")
-	fmt.Println(cnt)
-
-	return sdk.NewDecCoinFromDec("sfd", cnt)
+func swapCoin(price sdk.Dec, amount sdk.Int, commition sdk.Dec) sdk.Dec {
+	cnt := amount.ToDec().Mul(price).Mul(commition)
+	return cnt
 }
 
-func swapDollar(price sdk.Dec, amount sdk.Dec, commition sdk.Dec) sdk.DecCoin {
-	cnt := amount.Quo(price).Mul(commition)
-
-	fmt.Println("swapDollar : ----------")
-	fmt.Println(cnt)
-
-	return sdk.NewDecCoinFromDec("sfl", cnt)
+func swapDollar(price sdk.Dec, amount sdk.Int, commition sdk.Dec) sdk.Dec {
+	cnt := amount.ToDec().Quo(price).Mul(commition)
+	return cnt
 }

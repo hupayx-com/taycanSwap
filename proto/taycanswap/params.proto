@@ -8,17 +8,29 @@ option go_package = "github.com/hupayx-com/taycanSwap/x/taycanswap/types";
 // Params defines the parameters for the module.
 message Params {
   option (gogoproto.goproto_stringer) = false;
-  string swap_commition                = 1 [
-    (gogoproto.moretags)   = "yaml:\"swap_commition\"",
+  string swap_pre_commition                = 1 [
+    (gogoproto.moretags)   = "yaml:\"swap_pre_commition\"",
     (gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec",
     (gogoproto.nullable)   = false
   ];
 
-  string swap_rest_endpoint = 2 [(gogoproto.moretags) = "yaml:\"swap_rest_endpoint\""];
+  string swap_post_commition                = 2 [
+    (gogoproto.moretags)   = "yaml:\"swap_post_commition\"",
+    (gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec",
+    (gogoproto.nullable)   = false
+  ];
 
-  string swap_base_denom = 3 [(gogoproto.moretags) = "yaml:\"swap_base_denom\""];
+  string swap_rest_endpoint = 3 [(gogoproto.moretags) = "yaml:\"swap_rest_endpoint\""];
 
-  string swap_token_id = 4 [(gogoproto.moretags) = "yaml:\"swap_token_id\""];
+  string swap_base_denom = 4 [(gogoproto.moretags) = "yaml:\"swap_base_denom\""];
 
-  bool swap_enabled = 5 [(gogoproto.moretags) = "yaml:\"swap_enabled\""];
+  string swap_token_id = 5 [(gogoproto.moretags) = "yaml:\"swap_token_id\""];
+
+  string swap_amount = 6 [(gogoproto.moretags) = "yaml:\"swap_amount\""];
+
+  bool swap_enabled = 7 [(gogoproto.moretags) = "yaml:\"swap_enabled\""];
+}
+
+message Supply {
+  string SupplyAmount = 1;
 }

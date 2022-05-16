@@ -26,11 +26,13 @@ const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 // Params defines the parameters for the module.
 type Params struct {
-	SwapCommition    github_com_cosmos_cosmos_sdk_types.Dec `protobuf:"bytes,1,opt,name=swap_commition,json=swapCommition,proto3,customtype=github.com/cosmos/cosmos-sdk/types.Dec" json:"swap_commition" yaml:"swap_commition"`
-	SwapRestEndpoint string                                 `protobuf:"bytes,2,opt,name=swap_rest_endpoint,json=swapRestEndpoint,proto3" json:"swap_rest_endpoint,omitempty" yaml:"swap_rest_endpoint"`
-	SwapBaseDenom    string                                 `protobuf:"bytes,3,opt,name=swap_base_denom,json=swapBaseDenom,proto3" json:"swap_base_denom,omitempty" yaml:"swap_base_denom"`
-	SwapTokenId      string                                 `protobuf:"bytes,4,opt,name=swap_token_id,json=swapTokenId,proto3" json:"swap_token_id,omitempty" yaml:"swap_token_id"`
-	SwapEnabled      bool                                   `protobuf:"varint,5,opt,name=swap_enabled,json=swapEnabled,proto3" json:"swap_enabled,omitempty" yaml:"swap_enabled"`
+	SwapPreCommition  github_com_cosmos_cosmos_sdk_types.Dec `protobuf:"bytes,1,opt,name=swap_pre_commition,json=swapPreCommition,proto3,customtype=github.com/cosmos/cosmos-sdk/types.Dec" json:"swap_pre_commition" yaml:"swap_pre_commition"`
+	SwapPostCommition github_com_cosmos_cosmos_sdk_types.Dec `protobuf:"bytes,2,opt,name=swap_post_commition,json=swapPostCommition,proto3,customtype=github.com/cosmos/cosmos-sdk/types.Dec" json:"swap_post_commition" yaml:"swap_post_commition"`
+	SwapRestEndpoint  string                                 `protobuf:"bytes,3,opt,name=swap_rest_endpoint,json=swapRestEndpoint,proto3" json:"swap_rest_endpoint,omitempty" yaml:"swap_rest_endpoint"`
+	SwapBaseDenom     string                                 `protobuf:"bytes,4,opt,name=swap_base_denom,json=swapBaseDenom,proto3" json:"swap_base_denom,omitempty" yaml:"swap_base_denom"`
+	SwapTokenId       string                                 `protobuf:"bytes,5,opt,name=swap_token_id,json=swapTokenId,proto3" json:"swap_token_id,omitempty" yaml:"swap_token_id"`
+	SwapAmount        string                                 `protobuf:"bytes,6,opt,name=swap_amount,json=swapAmount,proto3" json:"swap_amount,omitempty" yaml:"swap_amount"`
+	SwapEnabled       bool                                   `protobuf:"varint,7,opt,name=swap_enabled,json=swapEnabled,proto3" json:"swap_enabled,omitempty" yaml:"swap_enabled"`
 }
 
 func (m *Params) Reset()      { *m = Params{} }
@@ -86,6 +88,13 @@ func (m *Params) GetSwapTokenId() string {
 	return ""
 }
 
+func (m *Params) GetSwapAmount() string {
+	if m != nil {
+		return m.SwapAmount
+	}
+	return ""
+}
+
 func (m *Params) GetSwapEnabled() bool {
 	if m != nil {
 		return m.SwapEnabled
@@ -93,38 +102,88 @@ func (m *Params) GetSwapEnabled() bool {
 	return false
 }
 
+type Supply struct {
+	SupplyAmount string `protobuf:"bytes,1,opt,name=SupplyAmount,proto3" json:"SupplyAmount,omitempty"`
+}
+
+func (m *Supply) Reset()         { *m = Supply{} }
+func (m *Supply) String() string { return proto.CompactTextString(m) }
+func (*Supply) ProtoMessage()    {}
+func (*Supply) Descriptor() ([]byte, []int) {
+	return fileDescriptor_6652740267d97670, []int{1}
+}
+func (m *Supply) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *Supply) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_Supply.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *Supply) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_Supply.Merge(m, src)
+}
+func (m *Supply) XXX_Size() int {
+	return m.Size()
+}
+func (m *Supply) XXX_DiscardUnknown() {
+	xxx_messageInfo_Supply.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_Supply proto.InternalMessageInfo
+
+func (m *Supply) GetSupplyAmount() string {
+	if m != nil {
+		return m.SupplyAmount
+	}
+	return ""
+}
+
 func init() {
 	proto.RegisterType((*Params)(nil), "hupayxcom.taycanswap.taycanswap.Params")
+	proto.RegisterType((*Supply)(nil), "hupayxcom.taycanswap.taycanswap.Supply")
 }
 
 func init() { proto.RegisterFile("taycanswap/params.proto", fileDescriptor_6652740267d97670) }
 
 var fileDescriptor_6652740267d97670 = []byte{
-	// 380 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x54, 0x52, 0xbd, 0x6e, 0xea, 0x30,
-	0x18, 0x4d, 0x2e, 0x5c, 0x74, 0x6f, 0xee, 0xaf, 0x52, 0x5a, 0x52, 0xa4, 0xc6, 0x28, 0x43, 0xc5,
-	0x42, 0x32, 0xb0, 0xa1, 0x4e, 0x29, 0xa8, 0xaa, 0xaa, 0x4a, 0x55, 0xda, 0xa9, 0x4b, 0xe4, 0x24,
-	0x16, 0x44, 0x60, 0x3b, 0xc2, 0x46, 0x25, 0x8f, 0xd0, 0xad, 0x63, 0xc7, 0x3e, 0x0e, 0x23, 0x63,
-	0xd5, 0x21, 0xaa, 0xe0, 0x0d, 0xf2, 0x04, 0x95, 0x9d, 0x20, 0xc2, 0xe4, 0xef, 0x9c, 0xef, 0x7c,
-	0xc7, 0x96, 0xcf, 0xa7, 0xb5, 0x38, 0x4c, 0x43, 0x48, 0xd8, 0x13, 0x4c, 0x9c, 0x04, 0xce, 0x21,
-	0x66, 0x76, 0x32, 0xa7, 0x9c, 0xea, 0x60, 0xb2, 0x48, 0x60, 0xba, 0x0c, 0x29, 0xb6, 0xf7, 0x92,
-	0x4a, 0xd9, 0x6e, 0x8e, 0xe9, 0x98, 0x4a, 0xad, 0x23, 0xaa, 0x62, 0xcc, 0x7a, 0xae, 0x69, 0x8d,
-	0x3b, 0xe9, 0xa3, 0x13, 0xed, 0xaf, 0x10, 0xfa, 0x21, 0xc5, 0x38, 0xe6, 0x31, 0x25, 0x86, 0xda,
-	0x51, 0xbb, 0x3f, 0xdd, 0xab, 0x55, 0x06, 0x94, 0x8f, 0x0c, 0x9c, 0x8f, 0x63, 0x3e, 0x59, 0x04,
-	0x76, 0x48, 0xb1, 0x13, 0x52, 0x86, 0x29, 0x2b, 0x8f, 0x1e, 0x8b, 0xa6, 0x0e, 0x4f, 0x13, 0xc4,
-	0xec, 0x21, 0x0a, 0xf3, 0x0c, 0x1c, 0xa7, 0x10, 0xcf, 0x06, 0xd6, 0xa1, 0x9b, 0xe5, 0xfd, 0x11,
-	0xc4, 0xe5, 0x0e, 0xeb, 0x37, 0x9a, 0x2e, 0x15, 0x73, 0xc4, 0xb8, 0x8f, 0x48, 0x94, 0xd0, 0x98,
-	0x70, 0xe3, 0x9b, 0xbc, 0xf3, 0x2c, 0xcf, 0xc0, 0x69, 0xc5, 0xe5, 0x40, 0x63, 0x79, 0xff, 0x05,
-	0xe9, 0x21, 0xc6, 0x47, 0x25, 0xa5, 0xbb, 0xda, 0x3f, 0x29, 0x0c, 0x20, 0x43, 0x7e, 0x84, 0x08,
-	0xc5, 0x46, 0x4d, 0x3a, 0xb5, 0xf3, 0x0c, 0x9c, 0x54, 0x9c, 0xf6, 0x82, 0xf2, 0x41, 0x2e, 0x64,
-	0x68, 0x28, 0xb0, 0x7e, 0xa1, 0x49, 0xc2, 0xe7, 0x74, 0x8a, 0x88, 0x1f, 0x47, 0x46, 0x5d, 0x3a,
-	0x18, 0x79, 0x06, 0x9a, 0x15, 0x87, 0x5d, 0xdb, 0xf2, 0x7e, 0x09, 0xfc, 0x20, 0xe0, 0x75, 0xa4,
-	0x0f, 0xb4, 0xdf, 0xb2, 0x8d, 0x08, 0x0c, 0x66, 0x28, 0x32, 0xbe, 0x77, 0xd4, 0xee, 0x0f, 0xb7,
-	0x95, 0x67, 0xe0, 0xa8, 0x32, 0x5c, 0x76, 0xcb, 0xd9, 0x51, 0x81, 0x06, 0xf5, 0xd7, 0x37, 0xa0,
-	0xb8, 0xb7, 0xab, 0x8d, 0xa9, 0xae, 0x37, 0xa6, 0xfa, 0xb9, 0x31, 0xd5, 0x97, 0xad, 0xa9, 0xac,
-	0xb7, 0xa6, 0xf2, 0xbe, 0x35, 0x95, 0xc7, 0x7e, 0xe5, 0xeb, 0x8b, 0x9c, 0x7b, 0xa2, 0x2c, 0xd2,
-	0xbd, 0x17, 0xbb, 0xb0, 0x74, 0x2a, 0x8b, 0x21, 0xb3, 0x08, 0x1a, 0x32, 0xe1, 0xfe, 0x57, 0x00,
-	0x00, 0x00, 0xff, 0xff, 0xd1, 0x47, 0xf7, 0x77, 0x33, 0x02, 0x00, 0x00,
+	// 460 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x94, 0x53, 0x31, 0x6f, 0xd4, 0x30,
+	0x14, 0x4e, 0xe0, 0x38, 0xc0, 0x14, 0x01, 0x6e, 0xd5, 0x86, 0x93, 0x88, 0x2b, 0x0f, 0xa8, 0x03,
+	0xbd, 0x0c, 0x1d, 0x90, 0x4e, 0x2c, 0x84, 0x76, 0x40, 0x05, 0xa9, 0x4a, 0x99, 0x58, 0x22, 0x5f,
+	0x62, 0x5d, 0xa3, 0x9e, 0x63, 0x2b, 0x76, 0x44, 0x23, 0xf1, 0x23, 0x18, 0x19, 0xf9, 0x39, 0x95,
+	0x58, 0x3a, 0x22, 0x86, 0x08, 0xdd, 0xfd, 0x83, 0xfc, 0x02, 0x64, 0x3b, 0xa7, 0xf3, 0xc1, 0xd4,
+	0x29, 0xef, 0xfb, 0xde, 0xf7, 0xbe, 0x4f, 0x4f, 0x7e, 0x01, 0x7b, 0x8a, 0x34, 0x19, 0x29, 0xe5,
+	0x17, 0x22, 0x22, 0x41, 0x2a, 0xc2, 0xe4, 0x58, 0x54, 0x5c, 0x71, 0x88, 0x2e, 0x6a, 0x41, 0x9a,
+	0xab, 0x8c, 0xb3, 0xf1, 0x5a, 0xe2, 0x94, 0xa3, 0x9d, 0x19, 0x9f, 0x71, 0xa3, 0x8d, 0x74, 0x65,
+	0xc7, 0xf0, 0xcf, 0x01, 0x18, 0x9e, 0x19, 0x1f, 0xd8, 0x00, 0xa8, 0x85, 0xa9, 0xa8, 0x68, 0x9a,
+	0x71, 0xc6, 0x0a, 0x55, 0xf0, 0x32, 0xf0, 0xf7, 0xfd, 0x83, 0x87, 0xf1, 0xe9, 0x75, 0x8b, 0xbc,
+	0xdf, 0x2d, 0x7a, 0x39, 0x2b, 0xd4, 0x45, 0x3d, 0x1d, 0x67, 0x9c, 0x45, 0x19, 0x97, 0x8c, 0xcb,
+	0xfe, 0x73, 0x28, 0xf3, 0xcb, 0x48, 0x35, 0x82, 0xca, 0xf1, 0x31, 0xcd, 0xba, 0x16, 0x3d, 0x6f,
+	0x08, 0x9b, 0x4f, 0xf0, 0xff, 0x8e, 0x38, 0x79, 0xaa, 0xc9, 0xb3, 0x8a, 0xbe, 0x5b, 0x51, 0xf0,
+	0x2b, 0xd8, 0xb6, 0x42, 0x2e, 0x95, 0x93, 0x7d, 0xc7, 0x64, 0x7f, 0xb8, 0x75, 0xf6, 0xc8, 0xcd,
+	0xde, 0xb0, 0xc4, 0xc9, 0x33, 0x13, 0xce, 0xa5, 0x5a, 0xa7, 0x9f, 0xf6, 0x8b, 0x57, 0x54, 0xaa,
+	0x94, 0x96, 0xb9, 0xe0, 0x45, 0xa9, 0x82, 0xbb, 0x26, 0xfc, 0xc5, 0x3f, 0xab, 0x6c, 0x68, 0xfa,
+	0x55, 0x12, 0x2a, 0xd5, 0x49, 0x4f, 0xc1, 0x18, 0x3c, 0x31, 0xc2, 0x29, 0x91, 0x34, 0xcd, 0x69,
+	0xc9, 0x59, 0x30, 0x30, 0x4e, 0xa3, 0xae, 0x45, 0xbb, 0x8e, 0xd3, 0x5a, 0x80, 0x93, 0xc7, 0x9a,
+	0x89, 0x89, 0xa4, 0xc7, 0x1a, 0xc3, 0x37, 0xc0, 0x10, 0xa9, 0xe2, 0x97, 0xb4, 0x4c, 0x8b, 0x3c,
+	0xb8, 0x67, 0x1c, 0x82, 0xae, 0x45, 0x3b, 0x8e, 0xc3, 0xaa, 0x8d, 0x93, 0x47, 0x1a, 0x7f, 0xd2,
+	0xf0, 0x7d, 0x0e, 0x5f, 0x03, 0x03, 0x53, 0xc2, 0x78, 0x5d, 0xaa, 0x60, 0x68, 0x66, 0x77, 0xbb,
+	0x16, 0x41, 0x67, 0xd6, 0x36, 0x71, 0x02, 0x34, 0x7a, 0x6b, 0x00, 0x9c, 0x80, 0x2d, 0xd3, 0xa3,
+	0x25, 0x99, 0xce, 0x69, 0x1e, 0xdc, 0xdf, 0xf7, 0x0f, 0x1e, 0xc4, 0x7b, 0x5d, 0x8b, 0xb6, 0x9d,
+	0xc9, 0xbe, 0xdb, 0x87, 0x9e, 0x58, 0x34, 0x19, 0x7c, 0xff, 0x81, 0x3c, 0xfc, 0x0a, 0x0c, 0xcf,
+	0x6b, 0x21, 0xe6, 0x0d, 0xc4, 0x60, 0xcb, 0x56, 0xd6, 0xdb, 0x9e, 0x51, 0xb2, 0xc1, 0xc5, 0x1f,
+	0xaf, 0x17, 0xa1, 0x7f, 0xb3, 0x08, 0xfd, 0x3f, 0x8b, 0xd0, 0xff, 0xb6, 0x0c, 0xbd, 0x9b, 0x65,
+	0xe8, 0xfd, 0x5a, 0x86, 0xde, 0xe7, 0x23, 0xe7, 0xa9, 0xed, 0x5d, 0x1f, 0xea, 0xd2, 0x5e, 0xf3,
+	0xb9, 0xbe, 0xfd, 0xab, 0xc8, 0xf9, 0x11, 0xcc, 0xdb, 0x4f, 0x87, 0xe6, 0xa2, 0x8f, 0xfe, 0x06,
+	0x00, 0x00, 0xff, 0xff, 0x56, 0x80, 0xc6, 0x3f, 0x23, 0x03, 0x00, 0x00,
 }
 
 func (m *Params) Marshal() (dAtA []byte, err error) {
@@ -155,39 +214,86 @@ func (m *Params) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 			dAtA[i] = 0
 		}
 		i--
-		dAtA[i] = 0x28
+		dAtA[i] = 0x38
+	}
+	if len(m.SwapAmount) > 0 {
+		i -= len(m.SwapAmount)
+		copy(dAtA[i:], m.SwapAmount)
+		i = encodeVarintParams(dAtA, i, uint64(len(m.SwapAmount)))
+		i--
+		dAtA[i] = 0x32
 	}
 	if len(m.SwapTokenId) > 0 {
 		i -= len(m.SwapTokenId)
 		copy(dAtA[i:], m.SwapTokenId)
 		i = encodeVarintParams(dAtA, i, uint64(len(m.SwapTokenId)))
 		i--
-		dAtA[i] = 0x22
+		dAtA[i] = 0x2a
 	}
 	if len(m.SwapBaseDenom) > 0 {
 		i -= len(m.SwapBaseDenom)
 		copy(dAtA[i:], m.SwapBaseDenom)
 		i = encodeVarintParams(dAtA, i, uint64(len(m.SwapBaseDenom)))
 		i--
-		dAtA[i] = 0x1a
+		dAtA[i] = 0x22
 	}
 	if len(m.SwapRestEndpoint) > 0 {
 		i -= len(m.SwapRestEndpoint)
 		copy(dAtA[i:], m.SwapRestEndpoint)
 		i = encodeVarintParams(dAtA, i, uint64(len(m.SwapRestEndpoint)))
 		i--
-		dAtA[i] = 0x12
+		dAtA[i] = 0x1a
 	}
 	{
-		size := m.SwapCommition.Size()
+		size := m.SwapPostCommition.Size()
 		i -= size
-		if _, err := m.SwapCommition.MarshalTo(dAtA[i:]); err != nil {
+		if _, err := m.SwapPostCommition.MarshalTo(dAtA[i:]); err != nil {
+			return 0, err
+		}
+		i = encodeVarintParams(dAtA, i, uint64(size))
+	}
+	i--
+	dAtA[i] = 0x12
+	{
+		size := m.SwapPreCommition.Size()
+		i -= size
+		if _, err := m.SwapPreCommition.MarshalTo(dAtA[i:]); err != nil {
 			return 0, err
 		}
 		i = encodeVarintParams(dAtA, i, uint64(size))
 	}
 	i--
 	dAtA[i] = 0xa
+	return len(dAtA) - i, nil
+}
+
+func (m *Supply) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *Supply) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *Supply) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.SupplyAmount) > 0 {
+		i -= len(m.SupplyAmount)
+		copy(dAtA[i:], m.SupplyAmount)
+		i = encodeVarintParams(dAtA, i, uint64(len(m.SupplyAmount)))
+		i--
+		dAtA[i] = 0xa
+	}
 	return len(dAtA) - i, nil
 }
 
@@ -208,7 +314,9 @@ func (m *Params) Size() (n int) {
 	}
 	var l int
 	_ = l
-	l = m.SwapCommition.Size()
+	l = m.SwapPreCommition.Size()
+	n += 1 + l + sovParams(uint64(l))
+	l = m.SwapPostCommition.Size()
 	n += 1 + l + sovParams(uint64(l))
 	l = len(m.SwapRestEndpoint)
 	if l > 0 {
@@ -222,8 +330,25 @@ func (m *Params) Size() (n int) {
 	if l > 0 {
 		n += 1 + l + sovParams(uint64(l))
 	}
+	l = len(m.SwapAmount)
+	if l > 0 {
+		n += 1 + l + sovParams(uint64(l))
+	}
 	if m.SwapEnabled {
 		n += 2
+	}
+	return n
+}
+
+func (m *Supply) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.SupplyAmount)
+	if l > 0 {
+		n += 1 + l + sovParams(uint64(l))
 	}
 	return n
 }
@@ -265,7 +390,7 @@ func (m *Params) Unmarshal(dAtA []byte) error {
 		switch fieldNum {
 		case 1:
 			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field SwapCommition", wireType)
+				return fmt.Errorf("proto: wrong wireType = %d for field SwapPreCommition", wireType)
 			}
 			var stringLen uint64
 			for shift := uint(0); ; shift += 7 {
@@ -293,11 +418,45 @@ func (m *Params) Unmarshal(dAtA []byte) error {
 			if postIndex > l {
 				return io.ErrUnexpectedEOF
 			}
-			if err := m.SwapCommition.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+			if err := m.SwapPreCommition.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
 				return err
 			}
 			iNdEx = postIndex
 		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field SwapPostCommition", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowParams
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthParams
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthParams
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			if err := m.SwapPostCommition.Unmarshal(dAtA[iNdEx:postIndex]); err != nil {
+				return err
+			}
+			iNdEx = postIndex
+		case 3:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field SwapRestEndpoint", wireType)
 			}
@@ -329,7 +488,7 @@ func (m *Params) Unmarshal(dAtA []byte) error {
 			}
 			m.SwapRestEndpoint = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
-		case 3:
+		case 4:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field SwapBaseDenom", wireType)
 			}
@@ -361,7 +520,7 @@ func (m *Params) Unmarshal(dAtA []byte) error {
 			}
 			m.SwapBaseDenom = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
-		case 4:
+		case 5:
 			if wireType != 2 {
 				return fmt.Errorf("proto: wrong wireType = %d for field SwapTokenId", wireType)
 			}
@@ -393,7 +552,39 @@ func (m *Params) Unmarshal(dAtA []byte) error {
 			}
 			m.SwapTokenId = string(dAtA[iNdEx:postIndex])
 			iNdEx = postIndex
-		case 5:
+		case 6:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field SwapAmount", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowParams
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthParams
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthParams
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.SwapAmount = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 7:
 			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field SwapEnabled", wireType)
 			}
@@ -413,6 +604,88 @@ func (m *Params) Unmarshal(dAtA []byte) error {
 				}
 			}
 			m.SwapEnabled = bool(v != 0)
+		default:
+			iNdEx = preIndex
+			skippy, err := skipParams(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthParams
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *Supply) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowParams
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: Supply: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: Supply: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field SupplyAmount", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowParams
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthParams
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthParams
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.SupplyAmount = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipParams(dAtA[iNdEx:])

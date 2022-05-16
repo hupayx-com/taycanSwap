@@ -9,11 +9,13 @@ import (
 )
 
 var (
-	ParamStoreKeySwapCommition    = []byte("swapCommition")
-	ParamStoreKeySwapRestEndPoint = []byte("SwapRestEndPoint")
-	ParamStoreKeySwapBaseDenom    = []byte("SwapBaseDenom")
-	ParamStoreKeySwapTokenId      = []byte("SwapTokenId")
-	ParamStoreKeySwapEnabled      = []byte("SwapEnabled")
+	ParamStoreKeySwapPreCommition  = []byte("swapPreCommition")
+	ParamStoreKeySwapPostCommition = []byte("swapPostCommition")
+	ParamStoreKeySwapRestEndPoint  = []byte("SwapRestEndPoint")
+	ParamStoreKeySwapBaseDenom     = []byte("SwapBaseDenom")
+	ParamStoreKeySwapTokenId       = []byte("SwapTokenId")
+	ParamStoreKeySwapAmount        = []byte("SwapAmount")
+	ParamStoreKeySwapEnabled       = []byte("SwapEnabled")
 )
 
 var _ paramtypes.ParamSet = (*Params)(nil)
@@ -25,39 +27,47 @@ func ParamKeyTable() paramtypes.KeyTable {
 
 // NewParams creates a new Params instance
 func NewParams(
-	SwapCommition sdk.Dec,
+	SwapPreCommition sdk.Dec,
+	SwapPostCommition sdk.Dec,
 	SwapRestEndPoint string,
 	SwapBaseDenom string,
 	SwapTokenId string,
+	SwapAmount string,
 	SwapEnabled bool,
 ) Params {
 	return Params{
-		SwapCommition:    SwapCommition,
-		SwapRestEndpoint: SwapRestEndPoint,
-		SwapBaseDenom:    SwapBaseDenom,
-		SwapTokenId:      SwapTokenId,
-		SwapEnabled:      true,
+		SwapPreCommition:  SwapPreCommition,
+		SwapPostCommition: SwapPostCommition,
+		SwapRestEndpoint:  SwapRestEndPoint,
+		SwapBaseDenom:     SwapBaseDenom,
+		SwapTokenId:       SwapTokenId,
+		SwapAmount:        SwapAmount,
+		SwapEnabled:       true,
 	}
 }
 
 // DefaultParams returns a default set of parameters
 func DefaultParams() Params {
 	return Params{
-		SwapCommition:    sdk.NewDecWithPrec(98, 2),                                                    // 0.98%
-		SwapRestEndpoint: "https://api.coingecko.com/api/v3/simple/price?ids=hupayx&vs_currencies=usd", // coingecko
-		SwapBaseDenom:    "asfd",                                                                       // baseDenom -> swapBaseDenom(registed)
-		SwapTokenId:      "hupayx",
-		SwapEnabled:      true,
+		SwapPreCommition:  sdk.NewDecWithPrec(98, 2),                                                    // 0.98%
+		SwapPostCommition: sdk.NewDecWithPrec(98, 2),                                                    // 0.98%
+		SwapRestEndpoint:  "https://api.coingecko.com/api/v3/simple/price?ids=hupayx&vs_currencies=usd", // coingecko
+		SwapBaseDenom:     "asfd",                                                                       // baseDenom -> swapBaseDenom(registed)
+		SwapTokenId:       "hupayx",
+		SwapAmount:        "500000000000000",
+		SwapEnabled:       true,
 	}
 }
 
 // ParamSetPairs get the params.ParamSet
 func (p *Params) ParamSetPairs() paramtypes.ParamSetPairs {
 	return paramtypes.ParamSetPairs{
-		paramtypes.NewParamSetPair(ParamStoreKeySwapCommition, &p.SwapCommition, validateDefault),
+		paramtypes.NewParamSetPair(ParamStoreKeySwapPreCommition, &p.SwapPreCommition, validateDefault),
+		paramtypes.NewParamSetPair(ParamStoreKeySwapPostCommition, &p.SwapPostCommition, validateDefault),
 		paramtypes.NewParamSetPair(ParamStoreKeySwapRestEndPoint, &p.SwapRestEndpoint, validateDefault),
 		paramtypes.NewParamSetPair(ParamStoreKeySwapBaseDenom, &p.SwapBaseDenom, validateDefault),
 		paramtypes.NewParamSetPair(ParamStoreKeySwapTokenId, &p.SwapTokenId, validateDefault),
+		paramtypes.NewParamSetPair(ParamStoreKeySwapAmount, &p.SwapAmount, validateDefault),
 		paramtypes.NewParamSetPair(ParamStoreKeySwapEnabled, &p.SwapEnabled, validateBool),
 	}
 }

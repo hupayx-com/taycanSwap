@@ -12,10 +12,12 @@ export declare type TaycanswapMsgTaycanSwapResponse = object;
  * Params defines the parameters for the module.
  */
 export interface TaycanswapParams {
-    swapCommition?: string;
+    swapPreCommition?: string;
+    swapPostCommition?: string;
     swapRestEndpoint?: string;
     swapBaseDenom?: string;
     swapTokenId?: string;
+    swapAmount?: string;
     swapEnabled?: boolean;
 }
 export interface TaycanswapQueryEstimateSwapResponse {
@@ -33,6 +35,16 @@ export interface TaycanswapQueryEstimateSwapResponse {
 export interface TaycanswapQueryParamsResponse {
     /** params holds all the parameters of this module. */
     params?: TaycanswapParams;
+}
+/**
+* Coin defines a token with a denomination and an amount.
+
+NOTE: The amount field is an Int which implements the custom method
+signatures required by gogoproto.
+*/
+export interface V1Beta1Coin {
+    denom?: string;
+    amount?: string;
 }
 /**
 * DecCoin defines a token with a denomination and a decimal amount.

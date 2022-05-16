@@ -1,7 +1,7 @@
 /* eslint-disable */
 import { Reader, Writer } from "protobufjs/minimal";
 import { Params } from "../taycanswap/params";
-import { DecCoin } from "../cosmos/base/v1beta1/coin";
+import { Coin, DecCoin } from "../cosmos/base/v1beta1/coin";
 export const protobufPackage = "hupayxcom.taycanswap.taycanswap";
 const baseQueryParamsRequest = {};
 export const QueryParamsRequest = {
@@ -91,7 +91,7 @@ const baseQueryEstimateSwapRequest = {};
 export const QueryEstimateSwapRequest = {
     encode(message, writer = Writer.create()) {
         if (message.coin !== undefined) {
-            DecCoin.encode(message.coin, writer.uint32(10).fork()).ldelim();
+            Coin.encode(message.coin, writer.uint32(10).fork()).ldelim();
         }
         return writer;
     },
@@ -105,7 +105,7 @@ export const QueryEstimateSwapRequest = {
             const tag = reader.uint32();
             switch (tag >>> 3) {
                 case 1:
-                    message.coin = DecCoin.decode(reader, reader.uint32());
+                    message.coin = Coin.decode(reader, reader.uint32());
                     break;
                 default:
                     reader.skipType(tag & 7);
@@ -119,7 +119,7 @@ export const QueryEstimateSwapRequest = {
             ...baseQueryEstimateSwapRequest,
         };
         if (object.coin !== undefined && object.coin !== null) {
-            message.coin = DecCoin.fromJSON(object.coin);
+            message.coin = Coin.fromJSON(object.coin);
         }
         else {
             message.coin = undefined;
@@ -129,7 +129,7 @@ export const QueryEstimateSwapRequest = {
     toJSON(message) {
         const obj = {};
         message.coin !== undefined &&
-            (obj.coin = message.coin ? DecCoin.toJSON(message.coin) : undefined);
+            (obj.coin = message.coin ? Coin.toJSON(message.coin) : undefined);
         return obj;
     },
     fromPartial(object) {
@@ -137,7 +137,7 @@ export const QueryEstimateSwapRequest = {
             ...baseQueryEstimateSwapRequest,
         };
         if (object.coin !== undefined && object.coin !== null) {
-            message.coin = DecCoin.fromPartial(object.coin);
+            message.coin = Coin.fromPartial(object.coin);
         }
         else {
             message.coin = undefined;
