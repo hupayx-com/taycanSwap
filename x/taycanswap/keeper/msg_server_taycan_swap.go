@@ -113,6 +113,10 @@ func (k msgServer) TaycanSwap(goCtx context.Context, msg *types.MsgTaycanSwap) (
 
 	} else if reqCoin.Denom == swapDenom { // asfd
 
+		enableAmount, _ := sdk.NewDecFromStr(k.GetParams(ctx).SwapAmount)
+
+		k.SetSwapAmount(ctx, enableAmount.Add(reqCoin.Amount.ToDec()).String())
+
 		commition := k.GetParams(ctx).SwapPostCommition // 0.98 (genesis.json)
 		swapCommition := sdk.NewDecWithPrec(1, 0).Sub(commition)
 
@@ -143,26 +147,26 @@ func (k msgServer) TaycanSwap(goCtx context.Context, msg *types.MsgTaycanSwap) (
 	if err := k.bankKeeper.SendCoinsFromAccountToModule(ctx, from, types.ModuleName, sdk.NewCoins(reqCoin)); err != nil {
 		return nil, err
 	}
-	k.Logger(ctx).Info("요청 수량만큼 모듈로 이동 \n\n\n\n\n")
+	k.Logger(ctx).Debug("요청 수량만큼 모듈로 이동 \n\n\n\n\n")
 	// 요청 수량만큼 전부 소각
 	if err := k.bankKeeper.BurnCoins(ctx, types.ModuleName, sdk.NewCoins(reqCoin)); err != nil {
 		return nil, err
 	}
-	k.Logger(ctx).Info("요청 수량만큼 전부 소각 \n\n\n\n\n")
+	k.Logger(ctx).Debug("요청 수량만큼 전부 소각 \n\n\n\n\n")
 	// 모듈에 수수료 만큼 민트 ==> sfl만 mint됨
 	if err := k.bankKeeper.MintCoins(ctx, types.ModuleName, sdk.NewCoins(swapReward)); err != nil {
 		return nil, err
 	}
-	k.Logger(ctx).Info("모듈에 수수료 만큼 민트 \n\n\n\n\n")
+	k.Logger(ctx).Debug("모듈에 수수료 만큼 민트 \n\n\n\n\n")
 	// swap 수량 만큼 mint
 	if err := k.bankKeeper.MintCoins(ctx, types.ModuleName, sdk.NewCoins(origin)); err != nil {
 		return nil, err
 	}
-	k.Logger(ctx).Info("swap 수량 만큼 mint \n\n\n\n\n")
+	k.Logger(ctx).Debug("swap 수량 만큼 mint \n\n\n\n\n")
 	// swap mint 수량만큼 계정으로 이체
 	if err := k.bankKeeper.SendCoinsFromModuleToAccount(ctx, types.ModuleName, from, sdk.NewCoins(origin)); err != nil {
 		return nil, err
 	}
-	k.Logger(ctx).Info("swap mint 수량만큼 계정으로 이체 \n\n\n\n\n")
+	k.Logger(ctx).Debug("swap mint 수량만큼 계정으로 이체 \n\n\n\n\n")
 	return &types.MsgTaycanSwapResponse{}, nil
 }
