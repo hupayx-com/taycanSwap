@@ -1,11 +1,11 @@
 accounts:
   - name: alice
-    coins: ["20000000000asfl", "0asfd"]
+    coins: ["20000000000000000000000asfl", "200000000stake"]
   - name: bob
-    coins: ["10000000000asfl", "0asfd"]
+    coins: ["20000000000000000000000asfl", "100000000stake"]
 validator:
   name: alice
-  staked: "100000000asfl"
+  staked: "100000000stake"
 client:
   openapi:
     path: "docs/static/openapi.yml"
@@ -13,4 +13,5 @@ client:
     path: "vue/src/store"
 faucet:
   name: bob
-  coins: ["5asfd", "100000asfl"]
+  coins: ["5000000000000000000asfl", "100000stake"]
+
