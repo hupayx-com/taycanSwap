@@ -1,0 +1,17 @@
+{
+    "type": "evmos",
+    "value": {
+      "key": "default",
+      "chain-id": "evmos_2023-1",
+      "rpc-addr": "http://10.30.11.53:26657",
+      "account-prefix": "evmos",
+      "keyring-backend": "test",
+      "gas-adjustment": 1.2,
+      "gas-prices": "0.0000001sfl",
+      "debug": true,
+      "timeout": "20s",
+      "output-format": "json",
+      "sign-mode": "direct"
+    }
+  }
+  
